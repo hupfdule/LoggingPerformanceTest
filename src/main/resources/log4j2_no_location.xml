@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorinterval="30" status="info" strict="true">
+    <Properties>
+        <Property name="filename">logs/log4j2-few-logdata.log</Property>
+        <Property name="filepattern">logs/log4j2-few-logdata.log.%i.gz</Property>
+    </Properties>
+    <Appenders>
+        <Appender type="Console" name="Console">
+            <Layout type="PatternLayout" pattern="%highlight{%d %-6p [%c{1.}] (%t) %m%n}" />
+        </Appender>
+        <Appender type="Console" name="Trace">
+            <Layout type="PatternLayout" pattern="%d %-6p [%C#%M] (%t) %m %ex%n" />
+        </Appender>
+        <Appender type="RollingFile" name="File" fileName="${filename}" filePattern="${filepattern}" bufferedIO="true">
+            <Policies>
+                <OnStartupTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="100mb"/>
+            </Policies>
+            <DefaultRolloverStrategy max="15" fileIndex="min" />
+            <Layout type="PatternLayout" pattern="%d %-6p [%c{1.}] (%t) %m%n" />
+        </Appender>
+    </Appenders>
+    <Loggers>
+        <Root level="INFO">
+            <AppenderRef ref="File" />
+        </Root>
+        <Logger name="LPT_SIMPLE" level="ALL" />
+        <Logger name="LPT_INEFFICENT" level="ALL" />
+    </Loggers>
+</Configuration>

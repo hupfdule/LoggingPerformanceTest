@@ -1,0 +1,60 @@
+Logging Performance Test
+========================
+Marco Herrn <marco@mherrn.de>
+2019-06-26
+:download-page: https://github.com/hupfdule/LoggingPerformanceTest/releases
+:jira-ticket: https://issues.apache.org/jira/browse/LOG4J2-2644
+:jul: https://docs.oracle.com/javase/8/docs/api/java/util/logging/package-summary.html
+:log4j2: https://logging.apache.org/log4j
+:SimpleFormatter: https://docs.oracle.com/javase/8/docs/api/java/util/logging/SimpleFormatter.html
+:OneLineFormatter: https://github.com/hupfdule/LoggingPerformanceTest/blob/master/src/main/java/com/github/hupfdule/lpt/OneLineFormatter.java
+:PatternLayout: https://logging.apache.org/log4j/2.x/manual/layouts.html#PatternLayout
+:maven: https://maven.apache.org
+:maven-assembly-plugin: https://maven.apache.org/plugins/maven-assembly-plugin
+
+This project only provides a simple test to compare the performance of
+logging with {jul}[java.util.logging] and {log4j2}[Log4j2], paying special attention to the
+performance when logging with location information (class and method name
+where the log statement was generated).
+It was created as an example for {jira-ticket}[LOG4J2-2644].
+
+What does it do?
+----------------
+
+This project only generates a number of log statements.
+
+It allows the generation of two different kinds of log statements.
+
+1. Simple strings.
+2. Complex and inefficient statements by calling methods and using string
+   concatenation.
+
+The number of log statements to generate and which set of log statements to
+generate must be given as command line arguments.
+
+How to run
+----------
+
+This project comes with example UNIX shell scripts and logging
+configuration files to test the following cases:
+
+- java.util.logging without location information (via {SimpleFormatter}[SimpleFormatter])
+- java.util.logging with location information (via {OneLineFormatter}[custom Formatter])
+- Log4j2 without location information (via {PatternLayout}[PatternLayout])
+- Log4j2 with location information (via {PatternLayout}[PatternLayout])
+
+To run it either download the tarball from the {download-page}[Download
+page] or clone and <<Build>> it yourself.
+
+Build
+-----
+
+This project uses {maven}[Maven] to build.
+
+It uses the {maven-assembly-plugin}[maven-assembly-plugin] to generate a distributable tarball.
+The distributable tarball contains the sample scripts and logging
+configurations.
+
+
+
+
